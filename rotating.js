@@ -104,16 +104,9 @@ function generateLetterGeometry(letter, centerX, vertexOffset) {
         break;
 
     case 'E':
-    // Vertical spine
         add(-0.35, 0, 0.20, 1.0);
-
-    // Top bar (fully connected)
         add(0.10, 0.40, 0.80, 0.20);
-
-    // Middle bar (same width + aligned to spine)
         add(0.05, 0.00, 0.70, 0.20);
-
-    // Bottom bar (same width as top, connects properly)
         add(0.10, -0.40, 0.80, 0.20);
         break;
 }
