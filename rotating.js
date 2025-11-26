@@ -71,9 +71,7 @@ function generateLetterGeometry(letter, centerX, vertexOffset) {
   let indices = [];
   let offset = vertexOffset;
 
-  const WIDTH = 1.0;
   const THICK = 0.22;
-  const BAR = 0.65;
 
   const add = (x,y,w,h) => {
     const block = createBlock(centerX + x, y, 0, w, h, THICK, offset);
@@ -85,8 +83,8 @@ function generateLetterGeometry(letter, centerX, vertexOffset) {
   switch(letter) {
     case 'D':
       add(-0.35, 0, 0.2, 1.0);
-      add(0.05, 0.4, BAR, 0.2);
-      add(0.05, -0.4, BAR, 0.2);
+      add(-0.20, 0.4, 0.75, 0.2);
+      add(-0.20, -0.4, 0.75, 0.2);
       add(0.35, 0, 0.2, 1.0);
       break;
 
