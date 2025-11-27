@@ -3,48 +3,155 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DOGE Logo</title>
+    <title>DOGE Logo Generator</title>
 
     <style>
+      /* CSS STYLING */
       html, body {
         margin: 0;
-        background-color: #2a2a2a;
+        height: 100%;
+        background-color: #1a1a1a;
+        font-family: 'Segoe UI', sans-serif;
+        color: white;
+        overflow: hidden; /* Prevent scrolling */
       }
 
-      #demo-canvas {
-        width: 800px;
-        height: 800px;
+      /* Flex Container: Canvas on Top, UI on Bottom */
+      #container {
+        display: flex;
+        flex-direction: column; 
+        height: 100vh;
+      }
+
+      /* Canvas Wrapper */
+      #canvas-wrapper {
+        flex-grow: 1; /* Fills remaining space */
+        position: relative;
+        background-color: #111; /* Default bg */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      canvas {
         display: block;
-        margin: 40px auto;
-        background-color: #111;
-        image-rendering: crisp-edges;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
       }
 
+      /* Bottom UI Panel */
+      #ui-panel {
+        background-color: #2a2a2a;
+        border-top: 1px solid #444;
+        padding: 15px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center; /* Center controls horizontally */
+        align-items: center;
+        gap: 25px; /* Spacing between groups */
+        z-index: 10;
+        box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+      }
+
+      /* Control Groups */
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        min-width: 120px;
+      }
+
+      label {
+        font-size: 13px;
+        color: #ccc;
+        font-weight: 600;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* Inputs */
+      input[type=range] { width: 140px; cursor: pointer; }
+      input[type=color] { width: 50px; height: 30px; border: none; cursor: pointer; border-radius: 4px; }
+      select { padding: 5px; border-radius: 4px; background: #444; color: white; border: 1px solid #555; cursor: pointer;}
+
+      /* Buttons */
+      .btn-group { display: flex; gap: 10px; align-items: flex-end; height: 100%; }
+      
+      button {
+        padding: 8px 16px;
+        background: #444;
+        border: 1px solid #555;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s;
+      }
+
+      button.primary { background: #11e9e6; color: #111; border: none; }
+      button:hover:not(:disabled) { filter: brightness(1.2); transform: translateY(-1px); }
+      button:disabled { opacity: 0.5; cursor: not-allowed; }  
+
+      /* Error Box */
       #error-box {
-        color: #fd8080;
-        font-weight: 500;
-        font-size: 18pt;
-        border: 1px solid white;
-        padding: 25px;
-        margin: 20px auto;
-        width: 800px;
-      }
-
-      .error-box-title {
-        color: #eee;
-        border-bottom: 1px solid gray;
+        position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+        color: #ff6b6b; background: rgba(0,0,0,0.9); padding: 15px; border: 1px solid red; display: none;
       }
     </style>
   </head>
   <body>
-    <canvas id="demo-canvas" width="800" height="800">
-      HTML5 canvas not supported in your browser.
-    </canvas>
 
-    <div id="error-box">
-      <span class="error-box-title">Error messages, if any, go in here.</span>
+    <div id="container">
+      <!-- 1. Canvas Area -->
+      <div id="canvas-wrapper">
+        <canvas id="demo-canvas" width="850" height="800"></canvas>
+        <div id="error-box"></div>
+      </div>
+
+      <!-- 2. UI Control Panel (Bottom) -->
+      <div id="ui-panel">
+        
+        <!-- Parameter: Extrusion Depth (Slider) -->
+        <div class="control-group">
+          <label>Depth: <span id="val-depth">0.22</span></label>
+          <input type="range" id="input-depth" min="0.05" max="1.0" step="0.01" value="0.22">
+        </div>
+
+        <!-- Parameter: Speed (Slider) -->
+        <div class="control-group">
+          <label>Speed: <span id="val-speed">1.0x</span></label>
+          <input type="range" id="input-speed" min="0.1" max="3.0" step="0.1" value="1.0">
+        </div>
+
+        <!-- Parameter: Color (Color Picker) -->
+        <div class="control-group">
+          <label>Logo Color</label>
+          <input type="color" id="input-color" value="#10e6e6">
+        </div>
+
+        <!-- Parameter: Background (Drop-down Menu) -->
+        <div class="control-group">
+          <label>Background</label>
+          <select id="input-bg">
+            <option value="dark">Dark Theme</option>
+            <option value="light">Light Theme</option>
+            <option value="blue">Blue</option>
+            <option value="animeBg">Anime Background</option>
+          </select>
+        </div>
+
+        <!-- Controls: Buttons -->
+        <div class="btn-group">
+          <button id="play-btn" class="primary">Play</button>
+          <button id="pause-btn">Pause</button>
+          <button id="reset-btn">Reset</button>
+        </div>
+      </div>
     </div>
 
+    <!-- Link to JS -->
     <script src="rotating.js"></script>
   </body>
-</html>
+</html> 
