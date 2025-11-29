@@ -250,7 +250,7 @@ function initWebGL() {
 
     // setup GL
     gl.enable(gl.DEPTH_TEST);
-    gl.clearColor(0.05, 0.05, 0.05, 1);
+    gl.clearColor(0.05, 0.05, 0.05, 0);
 
     // upload projection
     const proj = getPerspectiveMatrix(Math.PI/3, canvas.width / canvas.height, 0.1, 100);
@@ -462,4 +462,5 @@ window.onload = function () {
     timeStart = performance.now();
     requestAnimationFrame(render);
 };
+
 
