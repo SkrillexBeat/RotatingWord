@@ -1,3 +1,5 @@
+
+
 /* ---------------------------------------------------------
    Matrix helpers
 --------------------------------------------------------- */
@@ -129,7 +131,6 @@ let animationId;
 let extrusionDepth  = 0.22;
 let animationSpeed  = 1.0;
 let logoColor       = [0.06, 0.9, 0.9, 1.0];
-let backgroundTheme = "dark";
 
 // animation time state
 let timeStart = performance.now();
@@ -292,19 +293,16 @@ function render(ts) {
     const Z   = -7;
 
     if (time < 4) {
-        rotY = Math.sin(time * (Math.PI/2)) * Math.PI;
+        rotY = -Math.sin(time * (Math.PI/2)) * Math.PI;
     }
     else if (time < 6) {
         const t = (time - 4) / 2;
-        const smooth = t*t*(3 - 2*t);
+        const smooth = t*t*(3 - 2*t); // smoothstep interpolation
         scale = 1 + (0.5 * smooth);
     }
     else {
         const t = time - 5;
         rotX = t * (Math.PI * 0.7);
-
-        // bouncing
-        const Y = Math.abs(Math.sin(t * Math.PI)) * 1.2 - 0.6;
 
         // breathing scale + sway
         scale = 1.5 + Math.cos(t * 3) * 0.2;
@@ -453,7 +451,7 @@ window.onload = function () {
         const c = gl.canvas;
         c.width  = c.clientWidth;
         c.height = c.clientHeight;
-
+        
         const proj = getPerspectiveMatrix(Math.PI/3, c.width/c.height, 0.1, 100);
         gl.uniformMatrix4fv(uProjLoc, false, proj);
     });
@@ -462,5 +460,3 @@ window.onload = function () {
     timeStart = performance.now();
     requestAnimationFrame(render);
 };
-
-
