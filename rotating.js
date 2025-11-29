@@ -1,15 +1,4 @@
 /* ---------------------------------------------------------
-   Error Display
---------------------------------------------------------- */
-function showError(msg) {
-    const box = document.getElementById("error-box");
-    const p = document.createElement("p");
-    p.innerText = msg;
-    box.appendChild(p);
-    console.error(msg);
-}
-
-/* ---------------------------------------------------------
    Matrix helpers
 --------------------------------------------------------- */
 function identityMatrix() {
@@ -473,3 +462,4 @@ window.onload = function () {
     timeStart = performance.now();
     requestAnimationFrame(render);
 };
+
