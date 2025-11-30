@@ -309,7 +309,7 @@ function render(ts) {
         rotY  = Math.sin(t * 1.5) * 0.3;
     }
 
-    // build mv
+    // build mv 
     const mv = identityMatrix();
 
     const cy = Math.cos(rotY), sy = Math.sin(rotY);
@@ -323,7 +323,7 @@ function render(ts) {
     mv[5] = cx;
     mv[6] = sx;
     mv[9] = -sx;
-    mv[10]= cx;
+    mv[10] = cx;
 
     mv[14] = Z;
 
